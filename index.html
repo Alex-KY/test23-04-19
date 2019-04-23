@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Test 23-04-19</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css"/>
+    <script src="lib/jquery-3.4.0.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1 class="u-text-center">Витрина</h1>
+    <div id="showcase">
+        <div class="courses u-mt-30">
+            <div class="courses-form form" id="filterform" role="form">
+                <div>
+                    <select id="subject" name="subject" @change="initFilter">
+                        <option value="">Все предметы</option>
+                        <option>Алгебра</option>
+                        <option>Английский язык</option>
+                        <option>Биология</option>
+                        <option>География</option>
+                        <option>Геометрия</option>
+                        <option>Демо-версия</option>
+                        <option>Информатика</option>
+                        <option>История</option>
+                        <option>Литература</option>
+                        <option>Математика</option>
+                        <option>Обществознание</option>
+                        <option>Окружающий мир</option>
+                        <option>Робототехника</option>
+                        <option>Русский язык</option>
+                        <option>Физика</option>
+                        <option>Химия</option>
+                    </select>
+                </div>
+                <div>
+                    <select id="genre" name="genre" @change="initFilter">
+                        <option value="">Все жанры</option>
+                            <option>Демо</option>
+                            <option>Задачник</option>
+                            <option>Подготовка к ВПР</option>
+                            <option>Подготовка к ЕГЭ</option>
+                            <option>Рабочая тетрадь</option>
+                    </select>
+                </div>
+                <div>
+                    <select id="grade" name="grade" @change="initFilter">
+                        <option value="">Все классы</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                    </select>
+                </div>
+                <div>
+                    <input class="borderFind" type="text" placeholder="Поиск" id="search" name="search" value="" @keyup.enter="initFilter">
+                    <button class="courses-form-search-btn" title="Найти" @click="initFilter"></button>
+                </div>
+            </div>
+            <div class="currency-toggle">
+              <label for="rub">рубли</label><input id="rub" name="currency" type="radio" value="рубли" checked @change="currency='рубли'"/><input id="bonus" name="currency" type="radio" value="бонусы" @change="currency='бонусы'"/><label for="bonus">бонусы</label>
+            </div>
+        </div>
+        <ul class="courses-list">
+            <li v-for="course in filtered" class="courses-sci">
+                <div class="sci-figure">
+                    <img :src="'https://www.imumk.ru/svc/coursecover/' + course.courseId" :alt="course.genre">
+                </div>
+                <div class="sci-info">
+                    <p class="sci-title">{{ course.subject }}</p>
+                    <p class="sci-grade">{{ getGrades(course.grade) }}</p>
+                    <p class="sci-genre">{{ course.genre }}</p>
+                    <p class="sci-controls"><a class="pure-button pure-button-primary btn-fluid" href=#>{{ currency == 'рубли' ? course.price + ',00 руб' : course.priceBonus + ' бонусов' }}</a></p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<script src="lib/vue.min.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>
+
